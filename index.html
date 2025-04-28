@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WorkLight</title>
+</head>
+<body>
+  <div id="status-container">
+    <div id="status-label"></div>
+    <div id="button-frame">
+      <button id="red-button" onclick="updateStatus('red', 'Ariel is: Deep in focus - please interrupt only if urgent.', 'white')">Focus</button>
+      <button id="yellow-button" onclick="updateStatus('yellow', 'Ariel is: Working - available by message or request.', 'black')">Working</button>
+      <button id="green-button" onclick="updateStatus('green', 'Ariel is: Available - for quick chats or questions.', 'white')">Available</button>
+      <button id="reset-button" onclick="resetStatus()">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    function updateStatus(color, text, fontcolor) {
+      document.getElementById('status-container').style.backgroundColor = color;
+      document.getElementById('status-label').innerHTML = text;
+      document.getElementById('status-label').style.fontWeight = 'bold';
+      document.getElementById('status-label').style.color = fontcolor;
+      document.getElementById('red-button').style.display = 'none';
+      document.getElementById('green-button').style.display = 'none';
+      document.getElementById('yellow-button').style.display = 'none';
+      document.getElementById('reset-button').style.display = 'block';
+    }
+
+    function resetStatus() {
+      document.getElementById('status-container').style.backgroundColor = 'white';
+      document.getElementById('status-label').innerHTML = '';
+      document.getElementById('status-label').style.color = 'black';
+      document.getElementById('red-button').style.display = 'block';
+      document.getElementById('green-button').style.display = 'block';
+      document.getElementById('yellow-button').style.display = 'block';
+      document.getElementById('reset-button').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
