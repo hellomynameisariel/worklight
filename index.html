@@ -2,22 +2,50 @@
 <html>
 <head>
   <title>WorkLight</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+    #status-container {
+      padding-top: 20px;
+      padding-left: 10px;
+      height: 100vh;
+      transition: background-color 0.3s ease;
+    }
+    #button-frame {
+      margin-top: 20px;
+    }
+    #name-input {
+      margin-top: 20px;
+      font-size: 1em;
+    }
+  </style>
 </head>
 <body>
   <div id="status-container">
     <div id="status-label"></div>
     <div id="button-frame">
-      <button id="red-button" onclick="updateStatus('red', 'Ariel is: Deep in focus - please interrupt only if urgent.', 'white')">Focus</button>
-      <button id="yellow-button" onclick="updateStatus('yellow', 'Ariel is: Working - available by message or request.', 'black')">Working</button>
-      <button id="green-button" onclick="updateStatus('green', 'Ariel is: Available - for quick chats or questions.', 'white')">Available</button>
-      <button id="reset-button" onclick="resetStatus()">Reset</button>
+      <button id="red-button" onclick="updateStatus('red', 'Deep in focus - please interrupt only if urgent.', 'white')">Focus</button>
+      <button id="yellow-button" onclick="updateStatus('yellow', 'Working - available by message or request.', 'black')">Working</button>
+      <button id="green-button" onclick="updateStatus('green', 'Available - for quick chats or questions.', 'white')">Available</button>
+      <button id="reset-button" onclick="resetStatus()" style="display:none;">Reset</button>
+    </div>
+    <div id="name-entry">
+      <input id="name-input" type="text" placeholder="Enter your name" />
     </div>
   </div>
 
   <script>
-    function updateStatus(color, text, fontcolor) {
-      document.getElementById('status-container').style.backgroundColor = color;
-      document.getElementById('status-label').innerHTML = text;
+    function getName() {
+      const name = document.getElementById('name-input').value.trim();
+      return name || 'Someone';
+    }
+
+    function updateStatus(color, message, fontcolor) {
+      const name = getName();
+      document.body.style.backgroundColor = color;
+      document.getElementById('status-label').innerHTML = `${name} is: ${message}`;
       document.getElementById('status-label').style.fontWeight = 'bold';
       document.getElementById('status-label').style.color = fontcolor;
       document.getElementById('red-button').style.display = 'none';
@@ -27,7 +55,7 @@
     }
 
     function resetStatus() {
-      document.getElementById('status-container').style.backgroundColor = 'white';
+      document.body.style.backgroundColor = 'white';
       document.getElementById('status-label').innerHTML = '';
       document.getElementById('status-label').style.color = 'black';
       document.getElementById('red-button').style.display = 'block';
