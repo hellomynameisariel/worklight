@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WorkLight: Visual Status Cue</title>
+  <title>WorkLight</title>
   <style>
     body {
       margin: 0;
@@ -13,6 +13,8 @@
       padding-top: 20px;
       padding-left: 10px;
       height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     #status-label {
@@ -64,8 +66,7 @@
     .footer-link {
       font-size: 0.7em;
       color: #888;
-      margin-top: 15px;
-      padding-left: 10px;
+      margin-top: 8px;
     }
 
     .footer-link a {
@@ -97,10 +98,10 @@
       <label for="size-slider">Text size:</label>
       <input type="range" id="size-slider" min="12" max="60" value="20" oninput="adjustTextSize(this.value)">
     </div>
-  </div>
 
-  <div class="footer-link">
-    <a href="https://hellomynameisariel.github.io/flowtools/" target="_blank">See All Flow Tools by Ariel</a>
+    <div class="footer-link">
+      <a href="https://hellomynameisariel.github.io/flowtools/" target="_blank">See All Flow Tools by Ariel</a>
+    </div>
   </div>
 
   <script>
