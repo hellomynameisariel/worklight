@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WorkLight</title>
+  <title>WorkLight: Visual Status Cue</title>
   <style>
     body {
       margin: 0;
@@ -60,6 +60,18 @@
     #text-size-control {
       margin-top: 20px;
     }
+
+    .footer-link {
+      font-size: 0.7em;
+      color: #888;
+      margin-top: 15px;
+      padding-left: 10px;
+    }
+
+    .footer-link a {
+      color: #888;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -85,6 +97,10 @@
       <label for="size-slider">Text size:</label>
       <input type="range" id="size-slider" min="12" max="60" value="20" oninput="adjustTextSize(this.value)">
     </div>
+  </div>
+
+  <div class="footer-link">
+    <a href="https://hellomynameisariel.github.io/flowtools/" target="_blank">See All Flow Tools by Ariel</a>
   </div>
 
   <script>
