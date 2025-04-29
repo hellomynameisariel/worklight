@@ -6,33 +6,84 @@
     body {
       margin: 0;
       font-family: sans-serif;
+      transition: background-color 0.3s ease;
     }
+
     #status-container {
       padding-top: 20px;
       padding-left: 10px;
       height: 100vh;
-      transition: background-color 0.3s ease;
     }
-    #button-frame {
+
+    #status-label {
+      margin-bottom: 20px;
+      transition: font-size 0.3s ease;
+    }
+
+    #button-frame button {
+      background-color: rgba(255, 255, 255, 0.5);
+      border: 1px solid #ccc;
+      color: #333;
+      padding: 8px 12px;
+      margin: 4px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    #controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       margin-top: 20px;
     }
+
     #name-input {
+      padding: 4px 8px;
+      font-size: 0.9em;
+      background-color: rgba(255, 255, 255, 0.3);
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+    }
+
+    #popout-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9em;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    #text-size-control {
       margin-top: 20px;
-      font-size: 1em;
     }
   </style>
 </head>
 <body>
   <div id="status-container">
-    <div id="status-label"></div>
+    <div id="status-label" style="font-size: 20px;"></div>
+
     <div id="button-frame">
-      <button id="red-button" onclick="updateStatus('red', 'Deep in focus - please interrupt only if urgent.', 'white')">Focus</button>
-      <button id="yellow-button" onclick="updateStatus('yellow', 'Working - available by message or request.', 'black')">Working</button>
-      <button id="green-button" onclick="updateStatus('green', 'Available - for quick chats or questions.', 'white')">Available</button>
-      <button id="reset-button" onclick="resetStatus()" style="display:none;">Reset</button>
+      <button onclick="updateStatus('red', 'Deep in focus - please interrupt only if urgent.', 'white')">Focus</button>
+      <button onclick="updateStatus('yellow', 'Working - available by message or request.', 'black')">Working</button>
+      <button onclick="updateStatus('green', 'Available - for quick chats or questions.', 'white')">Available</button>
+      <button onclick="resetStatus()">Reset</button>
     </div>
-    <div id="name-entry">
-      <input id="name-input" type="text" placeholder="Enter your name" />
+
+    <div id="controls">
+      <label for="name-input">Name:</label>
+      <input id="name-input" type="text" placeholder="Your name">
+      <button id="popout-button" onclick="popOutWindow()">
+        Pop-out &#x2197;
+      </button>
+    </div>
+
+    <div id="text-size-control">
+      <label for="size-slider">Text size:</label>
+      <input type="range" id="size-slider" min="12" max="60" value="20" oninput="adjustTextSize(this.value)">
     </div>
   </div>
 
@@ -43,25 +94,25 @@
     }
 
     function updateStatus(color, message, fontcolor) {
-      const name = getName();
       document.body.style.backgroundColor = color;
-      document.getElementById('status-label').innerHTML = `${name} is: ${message}`;
+      document.getElementById('status-label').innerHTML = `${getName()} is: ${message}`;
       document.getElementById('status-label').style.fontWeight = 'bold';
       document.getElementById('status-label').style.color = fontcolor;
-      document.getElementById('red-button').style.display = 'none';
-      document.getElementById('green-button').style.display = 'none';
-      document.getElementById('yellow-button').style.display = 'none';
-      document.getElementById('reset-button').style.display = 'block';
     }
 
     function resetStatus() {
       document.body.style.backgroundColor = 'white';
       document.getElementById('status-label').innerHTML = '';
       document.getElementById('status-label').style.color = 'black';
-      document.getElementById('red-button').style.display = 'block';
-      document.getElementById('green-button').style.display = 'block';
-      document.getElementById('yellow-button').style.display = 'block';
-      document.getElementById('reset-button').style.display = 'none';
+    }
+
+    function popOutWindow() {
+      const popWindow = window.open(window.location.href, '_blank', 'width=400,height=400');
+      popWindow.document.title = "WorkLight (Pop-Out)";
+    }
+
+    function adjustTextSize(size) {
+      document.getElementById('status-label').style.fontSize = size + 'px';
     }
   </script>
 </body>
